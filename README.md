@@ -20,6 +20,17 @@ int main()
 }
 ```
 
+### 修飾詞
+<ul>
+    <li>public :成員可以直接使用</li>
+    <li>protected:繼承類別准許存取 protected 成員 但外部使用仍然禁止</li>
+    <li>private:宣告的函式或變數 只能由自己類別所使用</li>
+</ul>
+
+
+
+
+
 
 ## 程式
 
