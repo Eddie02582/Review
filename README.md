@@ -28,6 +28,56 @@ int main()
 </ul>
 
 
+### 問輸出是多少?(MTK)
+```c++
+#include <stdio.h>
+
+#define SWAP(a,b) tmp = a; a = b ; b= tmp;
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+    int tmp = 0;
+    int n = 6;
+    
+    if(n > 6)
+    SWAP(a,b);
+    
+    printf("%d %d %d",tmp,a,b);
+        
+    return 0;
+}
+```
+因為SWAP並沒有用括號起來實際程式碼
+```c++
+    int a = 10;
+    int b = 20;
+    int tmp = 0;
+    int n = 6;
+    if(n > 6)
+         tmp = a
+    a = b ; 
+    b= tmp;     
+```
+所以輸出為 0,20,0
+
+
+### 問輸出是多少?(MTK)
+```c++
+int main()
+{
+    int arr[8] = {0,1,2,3,4,5,6,7};
+    int* ptr1 = &arr[0];
+    char* ptr2 = (char*) ptr1;
+    printf("%d",*ptr2);
+    
+    return 0;
+}
+```
+ptr1 為arr[0]的address
+ptr2 為ptr1的address
+所以*ptr2  等於arr[0]的address取値
 
 
 
@@ -127,7 +177,7 @@ int FindZero(int arr[],int size)
 }
 ```
 ### Print Number Exclude
-印出0~500不包含exclue的數字
+給一個int a[20]已排序的陣列，請寫一個function(a, size)能印出0~500的數字，且不包含a陣列內的元素，請用最少的時間和空間複雜度完成
 
 
 ```c++
@@ -157,7 +207,11 @@ int print_exclude(int *arr,int size){
 }
 ```
 ### Print Number Exclude II
-印出1~199不包含exclue的數字
+```
+給一個int a[20]已排序的陣列，請寫一個function(a, size, b)能依照參數b(b = 0~4)印出該區間的數字，且不包含a陣列內的元素
+b = 0, 印出0~99
+b = 1, 印出100~199
+```
 
 ```c++
 #include <iostream>
@@ -260,11 +314,35 @@ void merge(int arr[], int front, int mid, int end) {
 }
 ```
 
+### prefix(MTK)
+給定一個prefix(第一行輸入)，輸出不包含此prefix的string
 
 
+```c++
+void check_prefix(string input, string prefix) {
+    
+    string sim_input = input.substr(0, prefix.length());
+    if (sim_input != prefix) {
+        cout << input << "\n";
+            return;
+    }
+}
+```
 
-### Middle of the Linked List
+```c++
 
+void check_prefix(string input, string prefix) {
+    if(prefix.length() > input.length())
+        return;
+    for(int i = 0; i < prefix.length();i++)
+    {
+        if(prefix[i] != input[i])
+            return;
+    }
+    cout << input << endl;
+    return;    
+}
+```
 
 
 
