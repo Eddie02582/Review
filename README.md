@@ -56,7 +56,7 @@ int main()
     int tmp = 0;
     int n = 6;
     if(n > 6)
-         tmp = a
+         tmp = a;
     a = b ; 
     b= tmp;     
 ```
@@ -64,6 +64,7 @@ int main()
 
 
 ### 問輸出是多少?(MTK)
+
 ```c++
 int main()
 {
@@ -75,16 +76,111 @@ int main()
     return 0;
 }
 ```
-ptr1 為arr[0]的address
-ptr2 為ptr1的address
-所以*ptr2  等於arr[0]的address取値
+ptr1 為arr[0]的address,ptr2 為ptr1的address,所以*ptr2  等於arr[0]的address取値,因此書出為0
 
 
+## Bitwise Operation
+
+### clearBit
+```c++
+int clearBit(int n, int k)
+{
+    return (n & (~(1 << (k - 1))));
+}
+```
+
+### setBit
+```c++
+int setBit(int n, int k)
+{
+    return (n | (1 << (k - 1)));
+}
+```
+
+### Toggle a bit
+```c++
+int toggleBit(int n, int k)
+{
+    return (n ^ (1 << (k - 1)));
+}
+```
+
+### print kth  bit
+
+```c++
+int toggleBit(int n, int k)
+{
+    return （n >> k）&1;
+    //or  return ((1 << 8) & n) ? 1 :0;
+}
+```
 
 
-## 程式
+### remove last 1 bit
+n = n & (n - 1)
 
-### CountBit
+### 取得最高位在哪裡
+```c++
+unsigned int countBits(unsigned int n){
+    int count = 0;    
+    while (n){
+        n >>= 1; 
+        ++count;
+    }
+    return count;    
+}
+```
+
+## Link List
+```
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+ ```
+
+### Middle of the Linked List(Leetcode 876)
+```c++
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode *first = head;
+        ListNode *slow = head;
+        while (first != nullptr && first->next != nullptr){
+            first = first->next->next;
+            slow = slow->next;
+        }
+        return slow;
+    }
+};
+```
+
+### 找出前半段的最大值
+```c++
+    int middleNode(ListNode* head) {
+        ListNode *first = head;
+        ListNode *slow = head;
+        int max = head.val();
+        while (first != nullptr && first->next != nullptr){
+            if (slow->val > max)         
+                max = slow->val;            
+            first = first->next->next;
+            slow = slow->next;
+        }
+        return max;
+    }
+```
+
+## Other程式
+
+
+### Number of 1 Bits(leetcode 191)
 題目:給定一個數字判斷2進位有幾個1,利用n & (n - 1)將低位1取出
 
 ```c++
@@ -106,6 +202,14 @@ int count_bit(int n){
     return count;    
 }
 ```
+### is Power Of Two(leetcode 232)
+
+```c++
+    bool isPowerOfTwo(int n) {
+        return n > 0 && not (n & n - 1)    
+    }
+```
+
 
 ### FindZero
 題目:一個陣列只包含1,0並且由1,0排序,找出0的位置
@@ -176,7 +280,115 @@ int FindZero(int arr[],int size)
     return left;
 }
 ```
-### Print Number Exclude
+## implent strcmp
+
+```c
+#include <stdio.h>
+#include <string.h>
+int strcmp(const char *str1, const char *str2)
+{
+    if(str1 == str2)
+        return 0;
+        
+    while(str1 != NULL && str2 != NULL){
+        int n1 = (int)*str1++;
+        int n2 = (int)*str2++;
+        /*if (n1 != n2){
+            return n1 - n2;
+        }*/
+        if(n1 > n2)
+            return 1;
+        else if(n1 < n2)
+            return -1;
+    }
+   
+    if(str1 != NULL){
+        return 1;
+    }
+    else if (str2 != NULL){
+        return -1;
+    }
+    return 0;
+}
+
+int main()
+{
+    char *a = "aBcDeF";
+    char *b = "AbCdEf";
+    char *c = "aacdef";
+    char *d = "aBcDeF";  
+    printf("strcmp(a, b) : %d\n", strcmp_(a, b));
+    printf("strcmp(a, c) : %d\n", strcmp_(a, c));
+    printf("strcmp(a, d) : %d\n", strcmp_(a, d));   
+    return 0;
+}
+```
+
+c++必須宣告const
+
+```c++
+int main()
+{
+    const char *a = "aBcDeF";
+    const char *b = "AbCdEf";
+    const char *c = "aacdef";
+    char d[] = "aBcDeF";
+    
+    
+    printf("strcmp(a, b) : %d\n", strcmp_(a, b));
+    printf("strcmp(a, c) : %d\n", strcmp_(a, c));
+    printf("strcmp(a, d) : %d\n", strcmp_(a, d));   
+    return 0;
+}
+```
+
+###費氏數列
+遞回
+```c++
+int Fibonacci(int n){
+    if(n == 1)
+        return 1;
+    if(n == 0)
+        return 0;       
+    else
+        return Fibonacci(n - 1) + Fibonacci(n - 2) ;
+}
+```
+
+
+iterative 
+```c++
+int fib(int n){
+    if (n < 2)
+        return n;
+    int a = 1, b = 0, c = 0;
+    for (int i = 2; i <= n; i++) {
+        //f(n) = f(n-1) +f(n-2)
+        c = a + b;
+        b = a;
+        a = c;
+    }           
+    return c;
+}
+```
+or use array
+```c++
+int fib(int n){
+    int f[n + 1] = {0};
+    f[1] = 1;  
+    for (int i = 2; i <= n; i++) {
+        f[n] = f[n-1] +f[n-2]; 
+    }           
+    return f[n];
+}
+```
+
+
+
+
+
+
+### Print Number Exclude(群聯三題)
 給一個int a[20]已排序的陣列，請寫一個function(a, size)能印出0~500的數字，且不包含a陣列內的元素，請用最少的時間和空間複雜度完成
 
 
@@ -206,7 +418,7 @@ int print_exclude(int *arr,int size){
     
 }
 ```
-### Print Number Exclude II
+### Print Number Exclude II(群聯三題)
 ```
 給一個int a[20]已排序的陣列，請寫一個function(a, size, b)能依照參數b(b = 0~4)印出該區間的數字，且不包含a陣列內的元素
 b = 0, 印出0~99
@@ -245,6 +457,52 @@ int print_exclude(int *arr,int size,int b){
     return 0;    
 }
 ```
+
+### find a + b +c = 10
+```c++
+int threeSum(int n)
+{
+    int count = 0;
+    for (int i = 1; i <= n - 2 ;i++){
+        for(int j = 1;j <= n - i - 1;j++)
+        {
+          printf("%d + %d + %d = %d\n",i,j,n -i-j,n);
+          count ++;
+        }
+    }
+    return count;
+}
+```
+
+考慮不重複(Leetcode 3Sum 簡單吧)
+```c++
+int threeSum(int n)
+{
+    int count = 0;
+    for (int  i = 1; i <= n/3 ;i++){
+        int l = i,r = n - 2 * i;
+        while (l <= r){
+           printf("%d + %d + %d = %d\n",i,l,r,n);
+           l += 1;
+           r -= 1;
+        }
+    }
+    
+    return count;
+}
+```
+result
+```
+1 + 1 + 8 = 10
+1 + 2 + 7 = 10
+1 + 3 + 6 = 10
+1 + 4 + 5 = 10
+2 + 2 + 6 = 10
+2 + 3 + 5 = 10
+2 + 4 + 4 = 10
+3 + 3 + 4 = 10
+```
+
 
 ### Sort Function
 
