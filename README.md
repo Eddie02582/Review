@@ -27,6 +27,11 @@ int main()
     <li>private:宣告的函式或變數 只能由自己類別所使用</li>
 </ul>
 
+### linked list vs array
+
+<a href =  "https://medium.com/@maggieliao.cm04g/%E8%B3%87%E7%B5%90%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E7%AD%86%E8%A8%98-1-linked-list-%E8%88%87-array-%E6%96%BCo-n-%E4%B9%8B%E5%B7%AE%E7%95%B0%E6%AF%94%E8%BC%83-badbf08b17ce">Linked list  vs Array</a>
+
+
 
 ### 問輸出是多少?(MTK)
 ```c++
@@ -133,16 +138,13 @@ unsigned int countBits(unsigned int n){
 
 ## Link List
 ```
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
  ```
 
 ### Middle of the Linked List(Leetcode 876)
@@ -175,6 +177,24 @@ public:
         }
         return max;
     }
+```
+
+### Reverse LinkedList
+```c++
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = NULL;
+        ListNode* post = NULL;
+        while (head){
+            post = head->next;
+            head->next = prev;            
+            prev = head;
+            head = post;   
+        }
+        return prev;
+    }
+};
 ```
 
 ## Other程式
