@@ -81,7 +81,7 @@ int main()
     return 0;
 }
 ```
-ptr1 為arr[0]的address,ptr2 為ptr1的address,所以*ptr2  等於arr[0]的address取値,因此書出為0
+ptr1 為arr[0]的address,ptr2等於ptr1,所以*ptr2  等於arr[0]的address取値,因此書出為0
 
 
 ## Bitwise Operation
@@ -196,6 +196,28 @@ public:
     }
 };
 ```
+
+### RemoveLinkList
+```c++
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head,int d) {
+        ListNode* dummy = head;
+        if(dummy->val == d)
+            return head->next
+       
+        while (dummy->next){
+            if(dummy->next->val == d){
+                dummy->next = dummy->next->next;
+                break;
+            }
+            dummy = dummy->next
+        }
+        return head;
+    }
+};
+```
+
 
 ## Other程式
 
@@ -362,7 +384,7 @@ int main()
 }
 ```
 
-###費氏數列
+### 費氏數列
 遞回
 ```c++
 int Fibonacci(int n){
